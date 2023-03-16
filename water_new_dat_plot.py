@@ -39,3 +39,21 @@ while current_temperature < final_temperature:
     power_data.append(power)
 
 ##############################################################
+
+# Load experimental data from raw.txt
+time_exp, temperature_exp = np.loadtxt('raw.txt', delimiter='\t', unpack=True)
+
+# Fit function
+def fit_function(t, T_0, A, B):
+    return T_0 + 1 / A * np.log(1 + A / B * t)
+
+# Initial guess values
+initial_guess = (29, 0.01473, 12.93)
+
+# Fit the experimental data
+params, _ = curve_fit(fit_function, time_exp, temperature_exp, p0=initial_guess)
+T_0, A, B = params
+
+# Evaluate the fitted function
+temperature_fit = fit_function(time_exp, T_0, A, B)
+
