@@ -74,3 +74,14 @@ ax1.set_xlabel("Time (s)")
 ax1.set_ylabel("Temperature (°C)")
 ax1.set_title("Temperature vs Time")
 ax1.legend()
+
+plt.tight_layout()
+plt.show()
+
+# # Save the figure as a PNG file
+# plt.savefig('temperature_vs_time_comparison.png', dpi=300)
+
+# Calculate the time derivatives for each dataset
+dTdt_exp = np.gradient(temperature_exp, time_exp)
+dTdt_sim = np.gradient(temperature_data, time_data)
+dTdt_fit = np.gradient(temperature_fit, time_exp)
