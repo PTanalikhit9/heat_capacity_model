@@ -68,3 +68,14 @@ ax1.plot(time_data, temperature_data, label='Simulation result', linestyle='--',
 
 # Plot the fitted curve with fitting constants displayed up to 4 significant figures
 ax1.plot(time_exp, temperature_fit, label=f'Fitted curve:T = {T_0:.2f} + (1/{A:.3f}) * ln(1 + ({A:.3f}/{B:.2f}) * t)', linestyle='-.', color='blue')
+
+ax1.set_xlabel("Time (s)")
+ax1.set_ylabel("Temperature (°C)")
+ax1.set_title("Temperature vs Time")
+ax1.legend()
+
+plt.tight_layout()
+plt.show()
+
+# Save the figure as a PNG file
+plt.savefig('temperature_vs_time_comparison.png', dpi=300)
