@@ -85,3 +85,33 @@ plt.show()
 dTdt_exp = np.gradient(temperature_exp, time_exp)
 dTdt_sim = np.gradient(temperature_data, time_data)
 dTdt_fit = np.gradient(temperature_fit, time_exp)
+
+# Plot dT/dt vs time
+fig, ax2 = plt.subplots(figsize=(10, 5))
+
+ax2.scatter(time_exp, dTdt_exp, marker ='x', color = 'darkblue', label='Experimental data')
+ax2.plot(time_data, dTdt_sim, label='Simulation result', linestyle='--', color='black')
+ax2.plot(time_exp, dTdt_fit, label=f'Fitted curve', linestyle='-.', color='blue')
+
+ax2.set_xlabel("Time (s)")
+ax2.set_ylabel("dT/dt (°C/s)")
+ax2.set_title("Time Derivative of Temperature vs Time")
+ax2.legend()
+
+plt.tight_layout()
+plt.show()
+
+# Plot dT/dt vs temperature
+fig, ax3 = plt.subplots(figsize=(10, 5))
+
+ax3.scatter(temperature_exp, dTdt_exp, marker ='x', color = 'darkblue', label='Experimental data')
+ax3.plot(temperature_data, dTdt_sim, label='Simulation result', linestyle='--', color='black')
+ax3.plot(temperature_fit, dTdt_fit, label=f'Fitted curve', linestyle='-.', color='blue')
+
+ax3.set_xlabel("Temperature (°C)")
+ax3.set_ylabel("dT/dt (°C/s)")
+ax3.set_title("Time Derivative of Temperature vs Temperature")
+ax3.legend()
+
+plt.tight_layout()
+plt.show()
