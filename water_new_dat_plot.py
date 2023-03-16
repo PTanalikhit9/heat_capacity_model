@@ -57,3 +57,24 @@ T_0, A, B = params
 # Evaluate the fitted function
 temperature_fit = fit_function(time_exp, T_0, A, B)
 
+# Plot the results
+fig, ax1 = plt.subplots(figsize=(10, 5))
+
+# Plot experimental data as a scatter plot
+ax1.scatter(time_exp, temperature_exp, marker ='x', color = 'darkblue', label='Experimental data')
+# ax1.scatter(time_exp, temperature_exp, label='Experimental data', alpha=0.5)
+
+# # Plot the simulation result
+ax1.plot(time_data, temperature_data, label='Simulation result', linestyle='--', color='black')
+
+# Plot the fitted curve with fitting constants displayed up to 4 significant figures
+ax1.plot(time_exp, temperature_fit, label=f'Fitted curve:T = {T_0:.2f} + (1/{A:.3f}) * ln(1 + ({A:.3f}/{B:.2f}) * t)', linestyle='-.', color='blue')
+
+ax1.set_xlabel("Time (s)")
+ax1.set_ylabel("Temperature (°C)")
+ax1.set_title("Temperature vs Time")
+ax1.legend()
+
+plt.tight_layout()
+plt.show()
+
