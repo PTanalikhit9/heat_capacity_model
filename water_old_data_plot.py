@@ -38,3 +38,33 @@ while current_temperature < final_temperature:
     power_data.append(power)
 
 ##############################################################
+
+# Load experimental data from raw.txt
+time_exp, temperature_exp = np.loadtxt('raw.txt', delimiter='\t', unpack=True)
+
+# Fit function
+def fit_function(t, T_0, A, B):
+    return T_0 + 1 / A * np.log(1 + A / B * t)
+
+# Initial guess values
+initial_guess = (29, 0.01473, 12.93)
+
+# Fit the experimental data
+params, _ = curve_fit(fit_function, time_exp, temperature_exp, p0=initial_guess)
+T_0, A, B = params
+
+# Evaluate the fitted function
+temperature_fit = fit_function(time_exp, T_0, A, B)
+
+# Plot the results
+fig, ax1 = plt.subplots(figsize=(10, 5))
+
+# Plot experimental data as a scatter plot
+ax1.scatter(time_exp, temperature_exp, marker ='x', color = 'darkblue', label='Experimental data')
+# ax1.scatter(time_exp, temperature_exp, label='Experimental data', alpha=0.5)
+
+# # Plot the simulation result
+ax1.plot(time_data, temperature_data, label='Simulation result', linestyle='--', color='black')
+
+# Plot the fitted curve with fitting constants displayed up to 4 significant figures
+ax1.plot(time_exp, temperature_fit, label=f'Fitted curve:T = {T_0:.2f} + (1/{A:.3f}) * ln(1 + ({A:.3f}/{B:.2f}) * t)', linestyle='-.', color='blue')
